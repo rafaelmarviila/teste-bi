@@ -1,0 +1,33 @@
+
+SELECT 
+COALESCE(_empresas.cd_cnpj, 'S/N') as cnpj,
+CASE COALESCE(_empresas.fl_matriz, 'S/N') WHEN '1' THEN 'MATRIZ' ELSE 'FILIAL' END AS matriz,
+COALESCE(_empresas.dt_abertura, 'S/N') as data_abertura,
+COALESCE(_empresas.nm_razao_social, 'S/N') as n_razao_social,
+COALESCE(_empresas.cd_natureza_juridica, 'S/N') as cd_natureza_juridica,
+COALESCE(_empresas.de_natureza_juridica, 'S/N') as de_natureza_juridica,
+COALESCE(_empresas.nm_logradouro, 'S/N') as nm_logradouro,
+COALESCE(_empresas.nu_logradouro, 'S/N') as nu_logradouro,
+COALESCE(_empresas.cd_cep, 'S/N') as cep,
+COALESCE(_empresas.nm_bairro, 'S/N') as bairro,
+COALESCE(_empresas.nm_municipio, 'S/N') as municipio,
+COALESCE(_empresas.sg_uf, 'S/N') as uf,
+COALESCE(_empresas.de_situacao, 'S/N') as situacao,
+COALESCE(_empresas.de_classif_natureza_juridica, 'S/N') as classif_natureza_juridica,
+COALESCE(_empresas_calc.vl_latitude, 'S/N') as vl_latitude,
+COALESCE(_empresas_calc.vl_longitude, 'S/N') as vl_longitude,
+COALESCE(_empresas_calc.vl_total_veiculos_antt, 'S/N') as vl_total_veiculos_antt,
+COALESCE(_empresas_calc.vl_total_veiculos_leves, 'S/N') as vl_total_veiculos_leves,
+COALESCE(_empresas_calc.vl_total_veiculos_pesados, 'S/N') as vl_total_veiculos_pesados,
+ CASE COALESCE(_empresas_calc.fl_optante_simples, 'S/N') 
+        WHEN '1' THEN 'SIM' ELSE 'NÃO' 
+	    END AS simples,
+COALESCE(_empresas_calc.qt_filial, 'S/N') as qt_filial,
+ CASE fl_optante_simei 
+        WHEN '1' THEN 'SIM' ELSE 'NÃO' 
+	    END AS simei,
+COALESCE(_empresas_calc.de_saude_tributaria, 'S/N') as de_saude_tributaria,
+COALESCE(_empresas_calc.de_nivel_atividade, 'S/N') as de_nivel_atividade
+
+FROM empresas AS _empresas
+INNER JOIN empresas_calc AS _empresas_calc ON _empresas.cd_cnpj = _empresas_calc.cd_cnpj;

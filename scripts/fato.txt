@@ -1,0 +1,11 @@
+SELECT 
+	   CONCAT(_empresas.cd_natureza_juridica, '-', LEFT(_empresas.cd_cnpj, 4), '-', RIGHT(_empresas.dt_abertura, 4)) AS chave,
+	   _empresas.cd_cnpj as cnpj,
+       _empresas.cd_natureza_juridica as nr_natureza_juridica, 
+	   _empresas.fl_matriz as matriz,
+	   _empresas_calc.fl_optante_simples as simples,
+	   _empresas_calc.fl_optante_simei as simei,
+	   _empresas.de_classif_natureza_juridica as classificação,
+	   _empresas.de_situacao as situacao
+FROM empresas AS _empresas
+INNER JOIN empresas_calc AS _empresas_calc ON _empresas.cd_cnpj = _empresas_calc.cd_cnpj;
